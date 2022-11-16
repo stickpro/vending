@@ -28,7 +28,7 @@ func Run(configDir string) {
 
 	repos := repository.NewRepositories(db)
 	services := service.NewServices(service.Deps{
-		Repos: repos,
+		Repository: repos,
 	})
 
 	router := router.NewRouter(services)

@@ -1,13 +1,19 @@
 package service
 
-import "github.com/stickpro/vending/internal/repository"
+import (
+	"github.com/stickpro/vending/internal/repository"
+)
 
 type Services struct {
+	Users UserServiceInterface
 }
 type Deps struct {
-	Repos *repository.Repositories
+	Repository *repository.Repositories
 }
 
 func NewServices(deps Deps) *Services {
-	return &Services{}
+	userService := NewUsersService(deps.Repository.Users)
+	return &Services{
+		Users: userService,
+	}
 }

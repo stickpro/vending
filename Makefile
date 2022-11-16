@@ -10,3 +10,6 @@ run: build
 
 rebuild:
 	docker-compose up -d --no-deps --build
+
+toolBuild:
+	go mod download && CGO_ENABLED=0 GOOS=linux go build -o vcli ./cmd/tools/main.go

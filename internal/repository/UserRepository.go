@@ -10,13 +10,13 @@ type userRepository struct {
 	DB *gorm.DB
 }
 
-type UserRepository interface {
+type Users interface {
 	Save(domain.User) (domain.User, error)
 	GetAll() ([]domain.User, error)
 	Migrate() error
 }
 
-func NewUserRepository(db *gorm.DB) UserRepository {
+func NewUserRepository(db *gorm.DB) Users {
 	return userRepository{
 		DB: db,
 	}
