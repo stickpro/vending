@@ -20,6 +20,6 @@ func (r *Router) Init() *mux.Router {
 	route := mux.NewRouter()
 
 	route.HandleFunc("/", handlers.HomePageIndex).Methods("GET")
-
+	route.HandleFunc("/users", handlers.UsersPageIndex).Methods("GET")
 	return route
 }

@@ -5,18 +5,18 @@ import (
 )
 
 type Repositories struct {
-	Users Users
+	Users    Users
+	Products Products
 }
 
 func NewRepositories(db *gorm.DB) *Repositories {
 	return &Repositories{
-		Users: NewUserRepository(db),
+		Users:    NewUserRepository(db),
+		Products: NewProductRepository(db),
 	}
 }
 
 func Migrate(r *Repositories) {
-	err := r.Users.Migrate()
-	if err != nil {
-		return
-	}
+	_ = r.Users.Migrate()
+	_ = r.Products.Migrate()
 }

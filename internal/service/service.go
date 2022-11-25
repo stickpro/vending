@@ -5,7 +5,8 @@ import (
 )
 
 type Services struct {
-	Users UserServiceInterface
+	Users    UserServiceInterface
+	Products ProductServiceInterface
 }
 type Deps struct {
 	Repository *repository.Repositories
@@ -13,7 +14,9 @@ type Deps struct {
 
 func NewServices(deps Deps) *Services {
 	userService := NewUsersService(deps.Repository.Users)
+	productService := NewProductsService(deps.Repository.Products)
 	return &Services{
-		Users: userService,
+		Users:    userService,
+		Products: productService,
 	}
 }
