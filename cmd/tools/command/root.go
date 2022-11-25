@@ -6,8 +6,6 @@ import (
 	"os"
 )
 
-const configDir = "configs"
-
 var rootCmd = &cobra.Command{
 	Use:   "vcli",
 	Short: "Vending CLI in Go",

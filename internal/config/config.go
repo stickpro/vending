@@ -91,7 +91,7 @@ func parseConfigFile(folder, env string) error {
 func setFromEnv(cfg *Config) {
 	cfg.HTTP.Host = viper.GetString("host")
 
-	cfg.DB.Host = viper.GetString("host")
+	cfg.DB.Host = viper.GetString("hostname")
 	cfg.DB.Port = viper.GetString("port")
 	cfg.DB.Username = viper.GetString("username")
 	cfg.DB.Password = viper.GetString("password")
@@ -122,7 +122,7 @@ func parseEnv() error {
 func parseHostFromEnv() error {
 	viper.SetEnvPrefix("http")
 
-	return viper.BindEnv("host")
+	return viper.BindEnv("hostname")
 }
 
 func parsePasswordFromEnv() error {
@@ -134,7 +134,7 @@ func parsePasswordFromEnv() error {
 func parsingDBFromEnv() error {
 	viper.SetEnvPrefix("db")
 
-	if err := viper.BindEnv("host"); err != nil {
+	if err := viper.BindEnv("hostname"); err != nil {
 		return err
 	}
 	if err := viper.BindEnv("port"); err != nil {

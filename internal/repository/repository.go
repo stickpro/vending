@@ -13,3 +13,10 @@ func NewRepositories(db *gorm.DB) *Repositories {
 		Users: NewUserRepository(db),
 	}
 }
+
+func Migrate(r *Repositories) {
+	err := r.Users.Migrate()
+	if err != nil {
+		return
+	}
+}

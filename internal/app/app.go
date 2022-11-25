@@ -27,6 +27,9 @@ func Run(configDir string) {
 	db, _ := pgsql.ConnectionDataBase(cfg.DB.Host, cfg.DB.Username, cfg.DB.Password, cfg.DB.DBName, cfg.DB.Port)
 
 	repos := repository.NewRepositories(db)
+	// migration
+	repository.Migrate(repos)
+
 	services := service.NewServices(service.Deps{
 		Repository: repos,
 	})
