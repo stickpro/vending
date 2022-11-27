@@ -8,4 +8,5 @@ type Product struct {
 	Url    string `json:"url" gorm:""`
 	Status bool   `json:"status" gorm:"not null;default:true"`
 	Code   uint8  `json:"code"`
+	Image  string `json:"image"`
 }

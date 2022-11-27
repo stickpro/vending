@@ -10,7 +10,7 @@ type UsersService struct {
 }
 
 type UserServiceInterface interface {
-	GetAll() ([]domain.User, error)
+	LoadAll() ([]domain.User, error)
 }
 
 func NewUsersService(repository repository.Users) *UsersService {
@@ -19,6 +19,6 @@ func NewUsersService(repository repository.Users) *UsersService {
 	}
 }
 
-func (u *UsersService) GetAll() ([]domain.User, error) {
+func (u *UsersService) LoadAll() ([]domain.User, error) {
 	return u.repository.GetAll()
 }

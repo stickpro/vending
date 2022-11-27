@@ -6,7 +6,7 @@ import (
 )
 
 func (h *Handler) UsersPageIndex(c *gin.Context) {
-	users, err := h.services.Users.GetAll()
+	users, err := h.services.Users.LoadAll()
 	if err != nil {
 		newResponse(c, http.StatusInternalServerError, err.Error())
 		return
