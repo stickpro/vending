@@ -20,5 +20,5 @@ func NewUsersService(repository repository.Users) *UsersService {
 }
 
 func (u *UsersService) GetAll() ([]domain.User, error) {
-	return u.GetAll()
+	return u.repository.GetAll()
 }

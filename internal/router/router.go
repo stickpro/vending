@@ -1,9 +1,10 @@
 package router
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"github.com/stickpro/vending/internal/delivery/http/v1/handlers"
 	"github.com/stickpro/vending/internal/service"
+	"net/http"
 )
 
 type Router struct {
@@ -16,10 +17,20 @@ func NewRouter(services *service.Services) *Router {
 	}
 }
 
-func (r *Router) Init() *mux.Router {
-	route := mux.NewRouter()
+func (r *Router) Init() *gin.Engine {
+	router := gin.Default()
 
-	route.HandleFunc("/", handlers.HomePageIndex).Methods("GET")
-	route.HandleFunc("/users", handlers.UsersPageIndex).Methods("GET")
-	return route
+	router.GET("/ping", func(c *gin.Context) {
+		c.String(http.StatusOK, "pong")
+	})
+	r.initAPI(router)
+	return router
+}
+
+func (r *Router) initAPI(router *gin.Engine) {
+	handlerV1 := handlers.NewHandler(r.services)
+	api := router.Group("/api")
+	{
+		handlerV1.Init(api)
+	}
 }

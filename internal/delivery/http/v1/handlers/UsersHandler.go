@@ -1,18 +1,22 @@
 package handlers
 
 import (
-	"encoding/json"
-	"github.com/stickpro/vending/pkg/logger"
+	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-func UsersPageIndex(w http.ResponseWriter, r *http.Request) {
-	users, err :=
+func (h *Handler) UsersPageIndex(c *gin.Context) {
+	users, err := h.services.Users.GetAll()
 	if err != nil {
-		logger.Error(err)
+		newResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(users)
+	c.JSON(http.StatusOK, users)
+}
+
+func (h *Handler) initUsersRoutes(api *gin.RouterGroup) {
+	users := api.Group("/users")
+	{
+		users.GET("", h.UsersPageIndex)
+	}
 }
