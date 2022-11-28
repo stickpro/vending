@@ -45,5 +45,4 @@ func (u userRepository) FindByColumn(value any, columnName string) (domain.User,
 	var user domain.User
 	err := u.DB.Find(&user, columnName+" = ?", value).Error
 	return user, err
-
 }

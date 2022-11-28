@@ -10,7 +10,7 @@ type OrdersService struct {
 }
 
 type OrdersServiceInterface interface {
-	LoadAll() ([]domain.Product, error)
+	LoadAll() ([]domain.Order, error)
 	Create(order domain.Order) (domain.Order, error)
 }
 

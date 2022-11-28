@@ -12,6 +12,7 @@ type ProductsService struct {
 type ProductServiceInterface interface {
 	LoadAll() ([]domain.Product, error)
 	Create(product domain.Product) (domain.Product, error)
+	GetById(id int) (domain.Product, error)
 }
 
 func NewProductsService(repository repository.Products) *ProductsService {
@@ -26,4 +27,8 @@ func (p *ProductsService) LoadAll() ([]domain.Product, error) {
 
 func (p *ProductsService) Create(product domain.Product) (domain.Product, error) {
 	return p.repository.Save(product)
+}
+
+func (p *ProductsService) GetById(id int) (domain.Product, error) {
+	return p.repository.FindById(id)
 }
