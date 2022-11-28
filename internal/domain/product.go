@@ -9,4 +9,5 @@ type Product struct {
 	Status bool   `json:"status" gorm:"not null;default:true"`
 	Code   uint8  `json:"code"`
 	Image  string `json:"image"`
+	Count  int    `json:"count"`
 }

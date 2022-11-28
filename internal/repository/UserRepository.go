@@ -13,6 +13,7 @@ type userRepository struct {
 type Users interface {
 	Save(domain.User) (domain.User, error)
 	GetAll() ([]domain.User, error)
+	FindByColumn(any, string) (domain.User, error)
 	Migrate() error
 }
 
@@ -37,4 +38,12 @@ func (u userRepository) GetAll() (users []domain.User, err error) {
 	logger.Info("[UserRepository]...Get All")
 	err = u.DB.Find(&users).Error
 	return users, err
+}
+
+func (u userRepository) FindByColumn(value any, columnName string) (domain.User, error) {
+	logger.Info("[UserRepository]... Find by column")
+	var user domain.User
+	err := u.DB.Find(&user, columnName+" = ?", value).Error
+	return user, err
+
 }
